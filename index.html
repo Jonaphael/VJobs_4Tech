@@ -1,0 +1,172 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>VJobs</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">
+                    <img src="imgs/logo-h-vjobs.png" class="img-logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Jobs <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    </ul>
+                </div>
+        </nav>
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <a class="btn btn-primary" data-toggle="collapse" href="#jobs_collapse" role="button" aria-expanded="false" aria-controls="jobs_collapse">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i> New Job
+                    </a>
+                    <div class="collapse mt-3" id="jobs_collapse">
+                        <div class="card card-body col-12">
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Front End Developer">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" id="description" rows="3"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="habilities">Habilities and Skills</label>
+                                            <textarea class="form-control" id="habilities" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="qualifications">Responsibilities and Qualificaion</label>
+                                            <textarea class="form-control" id="qualifications" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="sal_base">Salary</label>
+                                            <input type="text" class="form-control" id="name" placeholder="R$ 5000.00">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="area">Type</label>
+                                            <select id="area" class="form-control">
+                                                <option selected>Developer</option>
+                                                <option selected>Tester</option>
+                                                <option selected>Designer</option>
+                                                <option selected>Trainee | Intern</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="impaired">
+                                    <label class="form-check-label" for="impaired">Impaired</label>
+                                </div>
+                                <button type="submit" class="btn btn-success float-right">
+                                    Create Jobs
+                                    <i class="fas fa-check-circle"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <!-- cards -->
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <img class="card-img-top" src="imgs/developer.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Front-end Developer JR</h5>
+                            <b>Description:</b>
+                            <p class="card-text">
+                                We are looking for a Front-End Web Developer who 
+                                is motivated to combine the art of design with 
+                                the art of programming. You will work with the UI/UX 
+                                designer and bridge the gap between graphical design 
+                                and technical implementation, taking an active role on 
+                                both sides and defining how the application looks as well 
+                                as how it works.
+                            </p>
+                            <b>Salary</b>
+                            <p> R$ 2500,00</p>
+                            <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card" >
+                        <img class="card-img-top" src="imgs/designer.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Designer UX/UI PL</h5>
+                            <b>Description:</b>
+                            <p class="card-text">
+                                    UI/UX Designer responsibilities include gathering user 
+                                    requirements, designing graphic elements and building 
+                                    navigation components. To be successful in this role, 
+                                    you should have experience with design software and wireframe 
+                                    tools. If you also have a portfolio of professional design 
+                                    projects that includes work with web/mobile applications, 
+                                    let us know.
+                            </p>
+                            <b>Salary</b>
+                            <p> R$ 3780,00</p>
+                            <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <img class="card-img-top" src="imgs/tester.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Data Science - Intern </h5>
+                            <b>Description:</b>
+                            <p class="card-text">
+                                    We are looking for a Data Scientist that will help us discover
+                                    the information hidden in vast amounts 
+                                    of data, and help us make smarter decisions 
+                                    to deliver even better products. Your primary 
+                                    focus will be in applying data mining techniques, 
+                                    doing statistical analysis, and building high quality 
+                                    prediction systems integrated with our products.
+                            </p>
+                            <b>Salary</b>
+                            <p> R$ 1900,00<p>
+                            <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- scricpts -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    </body>
+</html>
