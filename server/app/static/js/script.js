@@ -7,11 +7,11 @@
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
           if (form.checkValidity() === false) {
-            //event.preventDefault();
+            event.preventDefault();
             event.stopPropagation();
           }
           else{
-              add_card();
+             // add_card();
           }
           form.classList.add('was-validated');          
         }, false);
@@ -21,7 +21,7 @@
 
 /* add a new card ( there is a better way //TODO )*/
 function add_card(){
-
+  
     var name = document.getElementById("name").value;
     var description = document.getElementById("description").value;
     var habilities = document.getElementById("habilities").value;

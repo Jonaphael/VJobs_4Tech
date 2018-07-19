@@ -9,6 +9,7 @@
   "author": "Jonaphael Aristil",
   "license": "ISC",
   "dependencies": {
+    "consign": "^0.1.6",
     "express": "4.16.3",
     "express-validator": "5.2.0"
   }
