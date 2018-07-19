@@ -3,7 +3,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-
+        <!-- css -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>VJobs</title>
     </head>
@@ -35,34 +35,39 @@
                     </a>
                     <div class="collapse mt-3" id="jobs_collapse">
                         <div class="card card-body col-12">
-                            <form>
+                            <form class="need-validation" novalidate>
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Front End Developer">
+                                    <input type="text" class="form-control" id="name" placeholder="Front End Developer" required>
+                                    <div class="invalid-feedback">Please type a name</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" id="description" rows="3"></textarea>
+                                    <textarea class="form-control" id="description" rows="3" required></textarea>
+                                    <div class="invalid-feedback">Please type the description</div>
                                 </div>
-                                <div class="row">
+                                <div class="form-row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label for="habilities">Habilities and Skills</label>
-                                            <textarea class="form-control" id="habilities" rows="3"></textarea>
+                                            <textarea class="form-control" id="habilities" rows="3" required></textarea>
+                                            <div class="invalid-feedback">Please type a skill</div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label for="qualifications">Responsibilities and Qualificaion</label>
-                                            <textarea class="form-control" id="qualifications" rows="3"></textarea>
+                                            <textarea class="form-control" id="qualifications" rows="3" required></textarea>
+                                            <div class="invalid-feedback">Please type a qualification</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="form-row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="sal_base">Salary</label>
-                                            <input type="text" class="form-control" id="name" placeholder="R$ 5000.00">
+                                            <label for="salary">Salary</label>
+                                            <input type="text" class="form-control" id="salary" placeholder="R$ 5000.00" required>
+                                            <div class="invalid-feedback">Please type the salary</div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
@@ -81,7 +86,7 @@
                                     <input type="checkbox" class="form-check-input" id="impaired">
                                     <label class="form-check-label" for="impaired">Impaired</label>
                                 </div>
-                                <button type="submit" class="btn btn-success float-right">
+                                <button type="submit" id="submit_form" class="btn btn-success float-right">
                                     Create Jobs
                                     <i class="fas fa-check-circle"></i>
                                 </button>
@@ -93,7 +98,7 @@
         </div>
         <div class="container mt-3">
             <!-- cards -->
-            <div class="row">
+            <div class="row" id="card-containers">
                 <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                     <div class="card">
                         <img class="card-img-top" src="imgs/developer.png" alt="Card image cap">
@@ -164,6 +169,7 @@
         </div>
 
         <!-- scricpts -->
+        <script src="js/script.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
