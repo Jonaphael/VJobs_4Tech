@@ -3,14 +3,14 @@
 /* validator */
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
-let jobs = require('../config/jobs');
+
 const Job = require('../models/job');
 
 module.exports = app => {
     
 const validator = [
     /* validations */
-    check('id', 'Invalid id must be a number').isNumeric(),
+   // check('id', 'Invalid id must be a number').isNumeric(),
     check('name', 'Invalid name').isLength({ min: 1, max: 255 }).trim(),
     check('salary', 'Invalid salary').isNumeric(),
     check('area', 'Invalid area').isLength({ min: 1, max: 50 }).trim(),
@@ -21,70 +21,89 @@ const validator = [
     check('isActive', 'Invalid field').isBoolean()
 ];
 
+const jobsCollection = app.config.firebaseConfig.collection('jobs');
+
 /* get all jobs */
-app.get('/jobs', async (req, res) => res.send(jobs));
+app.get('/jobs', async (req, res) => {
+    
+    try {
+
+        let jobs = [];
+        const docs = await jobsCollection.get();
+        docs.forEach( doc => jobs.push(extractJob(doc)));
+        return res.send(jobs);
+    
+    } catch (error) { return res.status(400).send('error') } 
+        
+});
 
 /* post a job */
 app.post('/jobs', validator , async (req ,res) => {
-    
+
     const errors = validationResult(req);
     
-    if (!errors.isEmpty()) return res.status(422).json({ errors: errors.mapped() });
+    if (!errors.isEmpty()) return res.status(422).send({ errors: errors.mapped() });
 
     /* no try catch because at this point everything is ok */
+    
+    /* const x = matchedData(req); */
+    const fbReturn = await jobsCollection.doc().set(matchedData(req));
 
-     /* const x = matchedData(req); */
-    const job = createJob(matchedData(req));
-    jobs.push(job);
-    return res.status(200).send('Ok');
+    if(fbReturn) return res.status(200).send('Ok');
+
+    return res.status(422).send('error');
 
 });
 
 /* update a job by id  *incomplete */
 app.put('/jobs/:id', async (req, res) => {
 
-    let index  = await jobs.findIndex( job => job.id == req.params.id);
-
-    if(index >= 0){
-         Object.keys(req.body).forEach( job => {
-             jobs[index][job] = req.body[job];
-         });
-
-         return res.status(200).send('ok');
-    }
-
-    return res.send(400).json({ error : "Job not found"})
-    res.send('put') 
+        try{ 
+            await jobsCollection.doc(req.params.id).update(req.body);
+            return res.status(200).send('Updated');
+        }
+         catch (error) {
+            return res.status(400).send({ 'error' : 'No job to update' })
+        }
 });
 
 /* delete a job by id  *incomplete */
-app.delete('/jobs/:id', (req, res) => {
-    const len = jobs.length;
+app.delete('/jobs/:id', async (req, res) => {
 
-    if(len > 0)
-        jobs.splice(jobs.findIndex(job => job.id == req.params.id),1); /* to fix */
-
-    if (len > jobs.length)
-        return res.status(200).send('Ok'); 
-
-    return res.status(400).send('Nothing to delete');
+    const result = await jobsCollection.doc(req.params.id).delete()
+   
+    return result ? res.status(400).send('Nothing to delete') : res.status(200).send("Ok") ;
 });
 
 /* get job by id */
-app.get('/jobs/:id', async(req, res) =>{ 
+app.get('/jobs/:id', async (req, res) =>{ 
     try {
 
-        /* the 'jobs' in the hero function is each element in jobs */
-        let foundJobs = jobs.filter( (obj) => (obj.id == req.params.id) );
-
-        return res.send(foundJobs);
+        /* just return 1 because each document have his own id */
+        const doc = await jobsCollection.doc(req.params.id).get();
+    
+        return res.send(extractJob(doc));
 
     } catch (error) {
-        return res.send.status(500).send("Internal error");
+        return res.status(400).send({ error : "Not found"})
     }
 }); 
 
 /* private methods */
+const extractJob = (job) => {
+    let v = job.data();
+    return  {
+    id : job.id, 
+    name: v.name,
+    description: v.description,
+    skills :v.skills,
+    area : v.area,
+    responsibilities: v.responsibilities,
+    salary: v.salary,
+    isImpaired: v.isImpaired,
+    isActive: v.isActive
+    }
+}
 
 /* create a new job */
 const createJob = (obj) => new Job(obj.id, 
@@ -96,5 +115,4 @@ const createJob = (obj) => new Job(obj.id,
     obj.salary,
     obj.isImpaired,
     obj.isActive);
-
 }

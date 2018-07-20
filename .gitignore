@@ -76,4 +76,4 @@ typings/
 .vscode/
 
 /* firebase key */
-/server/config/firebase.json
+/server/config/firebaseKey.json

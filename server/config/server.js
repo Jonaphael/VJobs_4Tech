@@ -10,10 +10,8 @@ server.use(bodyParser.urlencoded({ extended : false }));
 server.use(bodyParser.json());
 
 consign()
-    .include('./routes')
+    .include('./config/firebaseConfig.js')
+    .then('./routes')
     .into(server)
-
-/* home */
-server.get('/', async(req, res) => res.redirect('http://localhost:3000/vjobs'));
 
 module.exports = server;
