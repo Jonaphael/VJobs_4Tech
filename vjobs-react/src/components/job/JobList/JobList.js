@@ -36,7 +36,7 @@ class JobList extends Component {
         
         let foundJobs = 
         
-            (this.state.jobs !== undefined && this.jobs > 0) ?
+            (this.state.jobs !== undefined && this.state.jobs.length > 0) ?
 
             (this.state.jobs.map( job => {
                 return (
@@ -52,8 +52,7 @@ class JobList extends Component {
             })
         ) 
         :
-
-        <Loading/>
+        (<Loading/>)
 
 
          return (
