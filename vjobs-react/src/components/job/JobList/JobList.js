@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import JobCard from '../JobCard/JobCard'
 import jobsDB from '../../../assets/jobs'
+import Loading from '../Loading/Loading'
 
 class JobList extends Component {
 
@@ -28,18 +29,32 @@ class JobList extends Component {
     }
 
     render(){
-        let foundJobs = (this.state.jobs.map( job => {
-                return (<JobCard 
-                                 key = {job.id} 
-                                 name= { job.name }
-                                 description= { job.description }
-                                 salary = { job.salary }
-                                 area = { job.area }
-                                 editHandler = { () => this.jobEditHandler(job.id) }
-                                 removeHandler = { () => this.jobRemoveHandler(job.id, job.name) }>
-                         </JobCard>);
+
+       /* if(this.state.jobs.length === 0)
+            return (<Loading/>);
+        */
+        
+        let foundJobs = 
+        
+            (this.state.jobs !== undefined && this.jobs > 0) ?
+
+            (this.state.jobs.map( job => {
+                return (
+                <JobCard 
+                    key = {job.id} 
+                    name= { job.name }
+                    description= { job.description }
+                    salary = { job.salary }
+                    area = { job.area }
+                    editHandler = { () => this.jobEditHandler(job.id) }
+                    removeHandler = { () => this.jobRemoveHandler(job.id, job.name) }>
+                </JobCard> );
             })
-        );
+        ) 
+        :
+
+        <Loading/>
+
 
          return (
              <div className="row mt-3" id="card-containers">
