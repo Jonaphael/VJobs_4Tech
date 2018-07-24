@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 
 import JobCard from '../JobCard/JobCard'
-import jobsDB from '../../../assets/jobs'
 import Loading from '../Loading/Loading'
+
+import jobsDB from '../../../assets/jobs'
+import axios from 'axios'
+
 
 class JobList extends Component {
 
@@ -17,7 +20,14 @@ class JobList extends Component {
     // }
 
     componentDidMount(){
-        this.setState({ jobs : jobsDB })
+        axios.get('/jobs')
+             .then( response => {
+                this.setState({ jobs : response.data });
+             })
+             .catch( error => {
+                 console.log(error);
+             })
+        // this.setState({ jobs : jobsDB })
     }
 
     jobEditHandler = (id) => {
@@ -25,7 +35,14 @@ class JobList extends Component {
     }
 
     jobRemoveHandler = (id, name) => {
-        window.confirm(`Are you sure you want to remvove '${ name }'`);
+        const result = window.confirm(`Are you sure you want to remvove '${ name }'`);
+        axios.delete(`/jobs/${id}`)
+             .then( response => {
+                alert("Job removed succesfully");
+             })
+            .catch( error => {
+                alert(`Error removing job ${name}`);
+            }) 
     }
 
     render(){
