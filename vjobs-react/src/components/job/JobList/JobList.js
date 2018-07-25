@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import JobCard from '../JobCard/JobCard'
 import Loading from '../Loading/Loading'
-
-import jobsDB from '../../../assets/jobs'
+import JobForm from '../JobForm/JobForm'
+import Collapse from '../../../hoc/collapse/Collapse' 
 import axios from 'axios'
 
 
@@ -18,6 +18,13 @@ class JobList extends Component {
     // constructor(){
     //     super();
     // }
+
+    addItemToList = (newItem) => {
+        let currentJobs = this.state.jobs;
+
+        currentJobs.push(newItem);
+        this.setState({jobs : currentJobs});
+    }
 
     componentDidMount(){
         axios.get('/jobs')
@@ -35,14 +42,19 @@ class JobList extends Component {
     }
 
     jobRemoveHandler = (id, name) => {
-        const result = window.confirm(`Are you sure you want to remvove '${ name }'`);
-        axios.delete(`/jobs/${id}`)
-             .then( response => {
-                alert("Job removed succesfully");
-             })
-            .catch( error => {
-                alert(`Error removing job ${name}`);
-            }) 
+    
+        if(window.confirm(`Are you sure you want to remove '${ name }'`)){
+            axios.delete(`/jobs/${id}`)
+                 .then( response => {
+                    let updateJobs = this.state.jobs;
+                    const removedIndex = updateJobs.findIndex( item => item.id = id);
+                    updateJobs.splice(removedIndex,1);
+                    this.setState({jobs : updateJobs})
+                 })
+                .catch( error => {
+                    console.log("error")
+                })
+        }
     }
 
     render(){
@@ -73,9 +85,14 @@ class JobList extends Component {
 
 
          return (
-             <div className="row mt-3" id="card-containers">
-                 { foundJobs }
-             </div>
+            <div>
+                <Collapse collapseId="jobForm"innerText="New Job">
+                    <JobForm addToList={this.addItemToList}/>
+                </Collapse>
+                <div className="row mt-3" id="card-containers">
+                    { foundJobs }
+                </div>
+            </div>
          )
     }
 

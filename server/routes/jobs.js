@@ -10,7 +10,7 @@ module.exports = app => {
     
 const validator = [
     /* validations */
-   // check('id', 'Invalid id must be a number').isNumeric(),
+    check('id', 'Invalid id must be a number').optional(),
     check('name', 'Invalid name').isLength({ min: 1, max: 255 }).trim(),
     check('salary', 'Invalid salary').isNumeric(),
     check('area', 'Invalid area').isLength({ min: 1, max: 50 }).trim(),
@@ -47,12 +47,14 @@ app.post('/jobs', validator , async (req ,res) => {
     /* no try catch because at this point everything is ok */
     
     /* const x = matchedData(req); */
-    const fbReturn = await jobsCollection.doc().set(matchedData(req));
-
-    if(fbReturn) return res.status(200).send('Ok');
-
-    return res.status(422).send('error');
-
+    const fbReturn = await jobsCollection.add(matchedData(req))
+            .then( res => {
+                if(fbReturn) return res.status(200).send(fbReturn.id);
+                return res.status(422).send('error');
+                
+            }).catch(err =>{
+                res.send(err)
+            });
 });
 
 /* update a job by id  *incomplete */
@@ -72,7 +74,7 @@ app.delete('/jobs/:id', async (req, res) => {
 
     const result = await jobsCollection.doc(req.params.id).delete()
    
-    return result ? res.status(400).send('Nothing to delete') : res.status(200).send("Ok") ;
+    return !result ? res.status(400).send('Nothing to delete') : res.status(200).send("Ok") ;
 });
 
 /* get job by id */

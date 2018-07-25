@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import logo from '../../../assets/images/logo-h-vjobs.png'
 
 const header = () => (
@@ -14,10 +14,10 @@ const header = () => (
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-                <a className="nav-link" href="">Jobs <span className="sr-only">(current)</span></a>
+                <Link className="nav-link" to="/jobs">Jobs <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="">About</a>
+                <Link className="nav-link" to="/about">About</Link>
             </li>
             </ul>
         </div>
