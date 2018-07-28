@@ -42,9 +42,15 @@ class JobList extends Component {
     }
 
     jobRemoveHandler = (id, name) => {
+
+        const axiosConfig = {
+            headers: {
+                'Authorization' : 'Bearer ' + window.localStorage.getItem('token')
+            }
+        }
     
         if(window.confirm(`Are you sure you want to remove '${ name }'`)){
-            axios.delete(`/jobs/${id}`)
+            axios.delete(`/jobs/${id}`, axiosConfig)
                  .then( response => {
                     let updateJobs = this.state.jobs;
                     const removedIndex = updateJobs.findIndex( item => item.id = id);
@@ -52,6 +58,9 @@ class JobList extends Component {
                     this.setState({jobs : updateJobs})
                  })
                 .catch( error => {
+                    if(error.response.status === 401)
+                        console.log('Nao autorizado');
+
                     console.log("error")
                 })
         }
@@ -70,7 +79,8 @@ class JobList extends Component {
             (this.state.jobs.map( job => {
                 return (
                 <JobCard 
-                    key = {job.id} 
+                    key = {job.id}
+                    id = { job.id }
                     name= { job.name }
                     description= { job.description }
                     salary = { job.salary }

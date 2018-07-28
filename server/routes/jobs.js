@@ -3,6 +3,7 @@
 /* validator */
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
+const auth = require('../config/security/tokenValidator')
 
 const Job = require('../models/job');
 
@@ -38,7 +39,7 @@ app.get('/jobs', async (req, res) => {
 });
 
 /* post a job */
-app.post('/jobs', validator , async (req ,res) => {
+app.post('/jobs', auth, validator , async (req ,res, next) => {
 
     const errors = validationResult(req);
     
@@ -58,7 +59,7 @@ app.post('/jobs', validator , async (req ,res) => {
 });
 
 /* update a job by id  *incomplete */
-app.put('/jobs/:id', async (req, res) => {
+app.put('/jobs/:id', auth, async (req, res, next) => {
 
         try{ 
             await jobsCollection.doc(req.params.id).update(req.body);
@@ -70,7 +71,7 @@ app.put('/jobs/:id', async (req, res) => {
 });
 
 /* delete a job by id  *incomplete */
-app.delete('/jobs/:id', async (req, res) => {
+app.delete('/jobs/:id', auth, async (req, res, next) => {
 
     const result = await jobsCollection.doc(req.params.id).delete()
    

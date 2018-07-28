@@ -20,8 +20,6 @@ class JobForm extends Component {
             newJob.isImpaired = true;
         else
             newJob.isImpaired = false;
-
-            console.log(newJob)
         
         /* is active */
         newJob.isActive = true;

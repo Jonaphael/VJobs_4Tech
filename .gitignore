@@ -77,3 +77,4 @@ typings/
 
 /* firebase key */
 /server/config/firebaseKey.json
+/server/config/secretkey.js
